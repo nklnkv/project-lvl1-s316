@@ -30,7 +30,7 @@ const gameResult = () => {
       console.log('Correct!');
       answersCount += 1;
     } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was ${realAnswer(isEven)}`);
+      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${realAnswer(isEven)}'`);
       return false;
     }
   }
