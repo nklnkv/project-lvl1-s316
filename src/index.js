@@ -1,7 +1,5 @@
 import readlineSync from 'readline-sync';
 
-const MAX_NUMBER = 100;
-const EVEN_FACTOR = 2;
 const RIGHT_ANSWERS_COUNT = 3;
 
 const welcome = () => console.log('Welcome to the Brain Games!');
@@ -12,36 +10,31 @@ const greeting = () => {
   return userName;
 };
 
-const randomNumber = max => Math.floor(Math.random() * max);
-
-const realAnswer = (isEven) => {
-  const answer = isEven ? 'yes' : 'no';
-  return answer;
-};
-
-const gameResult = () => {
-  let answersCount = 0;
-  while (answersCount < RIGHT_ANSWERS_COUNT) {
-    const number = randomNumber(MAX_NUMBER);
-    console.log(`Question: ${number}`);
-    const answer = readlineSync.question('Your answer: ');
-    const isEven = number % EVEN_FACTOR === 0;
-    if ((isEven && answer === 'yes') || (!isEven && answer === 'no')) {
-      console.log('Correct!');
-      answersCount += 1;
-    } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${realAnswer(isEven)}'`);
-      return false;
-    }
-  }
-  return true;
-};
-
-const isEvenGame = () => {
-  console.log('Answer "yes" if number even otherwise answer "no".\n');
+const gameRunner = ({ description, makeTask, check }) => {
+  console.log(description);
   const userName = greeting();
-  const farewell = gameResult() ? 'Congratulations' : 'Let\'s try again';
+
+  let iteration = 0;
+  let farewell = 'Congratulations';
+
+  while (iteration < RIGHT_ANSWERS_COUNT) {
+    const { question, answer } = makeTask(iteration);
+    console.log(`Question: ${question}`);
+
+    const userAnswer = readlineSync.question('Your answer: ');
+    const result = check(userAnswer, answer);
+    if (result.isWin) {
+      console.log('Correct!');
+    } else {
+      console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${result.rightAnswer}'`);
+      farewell = 'Let\'s try again';
+      break;
+    }
+
+    iteration += 1;
+  }
+
   console.log(`${farewell}, ${userName}!`);
 };
 
-export { welcome, greeting, isEvenGame };
+export { welcome, greeting, gameRunner };
