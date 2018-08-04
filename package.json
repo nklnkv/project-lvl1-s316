@@ -1,13 +1,13 @@
 {
   "name": "brain-games-nklnkv",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "this is the first hexlet project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-node": "babel-node",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
-    "prepublishOnly": "npm run build"    
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -30,9 +30,12 @@
     "babel-preset-stage-0": "^6.24.1"
   },
   "bin": {
-     "brain-games": "dist/bin/brain-games.js"
+    "brain-games": "dist/bin/brain-games.js"
   },
   "files": [
     "dist"
-  ]  
+  ],
+  "dependencies": {
+    "readline-sync": "^1.4.9"
+  }
 }
