@@ -2,7 +2,6 @@
   "name": "brain-games-nklnkv",
   "version": "1.0.4",
   "description": "this is the first hexlet project",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-node": "babel-node",
